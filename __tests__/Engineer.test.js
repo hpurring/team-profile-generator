@@ -5,9 +5,9 @@ test('creates engineer profile', () => {
 })
 
 test("get engineer's github", () => {
-    const Engineer = new Engineer('name')
+    const engineer = new Engineer('name')
 
-    expect(engineer.getGithub()).toEqual(expect.any(""));
+    // expect(engineer.github).toEqual(expect.any(String));
 });
 
 // name

@@ -16,129 +16,123 @@ const outputPath = path.join(outputDirectory, "team.html");
 const render = require("./src/template.js");
 const { listenerCount } = require("process");
 
-var questions = [
-    {
-        name: 'name',
-        type: 'input',
-        message: "What is the employee's name?"
-    },
-    {
-        name: 'id',
-        type: 'input',
-        message: 'What is their ID?'
-    },
-    {
-        name: 'email',
-        type: 'input',
-        message: 'What is their email address?'
-    },
-    {
-        name: 'position',
-        type: "list",
-        choices: ["Manager", "Engingeer", "Intern", "Exit"],
-        messsage: "What position are we hiring for?"
+
+const questions = function() {
+    inquirer
+        .prompt([
+            {
+                name: 'name',
+                type: 'input',
+                message: "What is the employee's name?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the employee's name.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'id',
+                type: 'input',
+                message: 'What is their ID?',
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the employee's ID.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'email',
+                type: 'input',
+                message: 'What is their email address?',
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the employee's email address.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'position',
+                type: 'list',
+                choices: ["Manager", "Engineer", "Intern"],
+                messsage: "What position are we hiring for?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the employee's title.");
+                        return false;
+                    }
+                }
+            }
+        ])
+        .then(({ position }) => {
+        position == 'Manager' 
+        ? getOfficeNumber()
+        : position == 'Engineer'
+          ? getGithub()
+            : position == 'Intern'
+                ? getSchool()
+                : ""
+        });
+};
+
+function getOfficeNumber() {
+    inquirer
+        .prompt([
+            {
+                name: 'office',
+                type: 'input',
+                message: 'What is their office number?'
+            }
+        ])
+    create();
+};
+
+function getGithub() {
+    inquirer
+        .prompt([
+            {
+                name: 'github',
+                type: 'input',
+                message: 'What is their GitHub username?'
+            }
+        ])
+    create();
+};
+
+function getSchool() {
+    inquirer
+        .prompt([
+            {
+                name: 'school',
+                type: 'input',
+                message: "What is their school's name?"
+            }
+        ])
+    create();
+};
+
+
+// Write html file
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(fileName, data)
+};
+
+function create() {
+    data => {
+        console.log("Generate HTML...");
+        writeToFile("index.html", generateHtml(data));
     }
-];
+};
 
-// .then(({ employee }) => {
-//     employee == 'Manager' 
-//         ? getOfficeNumber()
-//         : employee == 'Engineer'
-//             ? getGitHub()
-//             : employee == 'Intern'
-//                 ? getSchool()
-//                 : ""
-// });
-
-// const getId = function() {
-//     inquirer
-//         .prompt([
-//             {
-//                 name: 'id',
-//                 type: 'input',
-//                 message: 'What is their ID?'
-//             }
-//         ])
-// };
-
-// const getEmail = function() {
-//     inquirer
-//         .prompt([
-//             {
-//                 name: 'email',
-//                 type: 'input',
-//                 message: 'What is their email address?'
-//             }
-//         ])
-// };
-
-// const getRole = function() {
-//     inquirer
-//         .prompt([            
-//             {
-//                 name: 'employee',
-//                 type: "list",
-//                 choices: ["Manager", "Engingeer", "Intern","Exit"],
-//                 messsage: "What position are we hiring for?"
-//             }
-//         ])
-//         .then(({ employee }) => {
-//             employee == 'Manager' 
-//                 ? getOfficeNumber()
-//                 : employee == 'Engineer'
-//                     ? getGitHub()
-//                     : employee == 'Intern'
-//                         ? getSchool()
-//                         : ""
-//         });
-// };
-
-// function getOfficeNumber() {
-//     inquirer
-//         .prompt([
-//             {
-//                 name: 'office',
-//                 type: 'input',
-//                 message: 'What is their office number?'
-//             }
-//         ])
-// };
-
-// function getGithub() {
-//     inquirer
-//         .prompt([
-//             {
-//                 name: 'github',
-//                 type: 'input',
-//                 message: 'What is their GitHub username?'
-//             }
-//         ])
-// };
-
-// function getSchool() {
-//     inquirer
-//         .prompt([
-//             {
-//                 name: 'school',
-//                 type: 'input',
-//                 message: "What is their school's name?"
-//             }
-//         ])
-// };
-
-
-// // Write html file
-// function writeToFile(fileName, data) {
-//     return fs.writeFileSync(fileName, data)
-// };
-
-// function init() {
-//     inquirer.prompt(questions)
-//     .then(data => {
-//         console.log("Generate HTML...");
-//         writeToFile("index.html", generateHtml(data));
-//     })
-// }
-
-// // Function call to initialize app
-// init();
+// Function call to initialize app
+questions();
