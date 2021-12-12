@@ -16,8 +16,9 @@ const outputPath = path.join(outputDirectory, "team.html");
 const render = require("./src/template.js");
 const { listenerCount } = require("process");
 
+const teamData = [];
 
-const questions = function() {
+const questions = employeeData => {
     inquirer
         .prompt([
             {
@@ -74,6 +75,11 @@ const questions = function() {
                 }
             }
         ])
+        .then(employeeData => {
+            teamData.push(employeeData)
+            console.log(employeeData);
+        })
+
         .then(({ position }) => {
         position == 'Manager' 
         ? getOfficeNumber()
@@ -83,7 +89,8 @@ const questions = function() {
                 ? getSchool()
                 : ""
         });
-};
+
+// inquirer .when statement...
 
 function getOfficeNumber() {
     inquirer
@@ -94,7 +101,15 @@ function getOfficeNumber() {
                 message: 'What is their office number?'
             }
         ])
-    create();
+    
+    .then(employeeData => {
+        teamData.push(employeeData)
+        console.log(teamData)
+    })
+
+    // .then((response) => {
+    //     enterAdditional()
+    // })
 };
 
 function getGithub() {
@@ -106,7 +121,14 @@ function getGithub() {
                 message: 'What is their GitHub username?'
             }
         ])
-    create();
+
+    .then(employeeData => {
+        teamData.push(employeeData)
+    })
+
+    .then((response) => {
+        enterAdditional()
+    })
 };
 
 function getSchool() {
@@ -118,21 +140,60 @@ function getSchool() {
                 message: "What is their school's name?"
             }
         ])
-    create();
+    .then(employeeData => {
+        teamData.push(employeeData)
+    })
+    
+    .then((response) => {
+        enterAdditional()
+    })
 };
 
+function enterAdditional() {
+    inquirer
+        .prompt([
+            {
+                name: 'confirmAdd',
+                type: 'confirm',
+                message: "Would you like to enter additional employees?"
+            }
+        ])
 
-// Write html file
-function writeToFile(fileName, data) {
-    return fs.writeFileSync(fileName, data)
-};
+    .then(employeeData => {
+        teamData.push(employeeData)
+        if (employeeData.confirmAdd) {
+          return questions(teamData);
+        } else {
+          create();
+        }
+      })
+    };
 
-function create() {
-    data => {
+    // Write html file
+    function writeToFile(fileName, employeeData) {
+        const outputDirectory = path.resolve(__dirname, "output");
+        const outputPath = path.join(outputDirectory, "team.html");
+
+        return fs.writeFileSync(outputPath, generateHtml(employeeData));
+        
+    };
+
+    function create() {
         console.log("Generate HTML...");
-        writeToFile("index.html", generateHtml(data));
-    }
+        writeToFile();
+    };
+
 };
+
+// // Write html file
+// function writeToFile(fileName, employeeData) {
+//     return fs.writeFileSync(fileName, employeeData)
+// };
+
+// function create() {
+//     console.log("Generate HTML...");
+//     writeToFile("index.html", generateHtml(employeeData));
+// };
 
 // Function call to initialize app
 questions();
