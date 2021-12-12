@@ -77,18 +77,16 @@ const questions = employeeData => {
         ])
         .then(employeeData => {
             teamData.push(employeeData)
-            console.log(employeeData);
+            console.log(employeeData)
         })
 
-        .then(({ position }) => {
-        position == 'Manager' 
-        ? getOfficeNumber()
-        : position == 'Engineer'
-          ? getGithub()
-            : position == 'Intern'
-                ? getSchool()
-                : ""
-        });
+        if (data.position == 'Manager') {
+            getOfficeNumber();
+        } else if (data.position == 'Engineer') {
+            getGithub();
+        } else {
+            getSchool();
+        };
 
 // inquirer .when statement...
 
