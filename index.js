@@ -2,9 +2,9 @@ const inquirer = require("inquirer");
 const generateHtml = require("./src/template");
 
 const Employee = require("./lib/Employee");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
-const Manager = require("./lib/Manager");
+const createEngineer = require("./lib/Engineer");
+const createIntern = require("./lib/Intern");
+const createManager = require("./lib/Manager");
 
 const fs = require("fs");
 const path = require("path");
@@ -39,33 +39,14 @@ const createEmployee = employeeData => {
         .then(employeeData => {
             if (employeeData.position == 'Manager') {
                 createManager();
+                // enterAdditional();
             } else if (employeeData.position == 'Engineer') {
                 createEngineer();
+                // enterAdditional();
             } else {
                 createIntern();
             };
-            enterAdditional();
         })
-
-function enterAdditional() {
-    inquirer
-        .prompt([
-            {
-                name: 'confirmAdd',
-                type: 'confirm',
-                message: "Would you like to enter additional employees?"
-            }
-        ])
-
-    .then(employeeData => {
-        teamData.push(employeeData)
-        if (employeeData.confirmAdd) {
-          return questions(teamData);
-        } else {
-          create();
-        }
-    })
-};
 
     // Write html file
     function writeToFile(fileName, employeeData) {
@@ -83,6 +64,25 @@ function enterAdditional() {
 
 };
 
+function enterAdditional() {
+    inquirer
+        .prompt([
+            {
+                name: 'confirmAdd',
+                type: 'confirm',
+                message: "Would you like to enter additional employees?"
+            }
+        ])
+
+    .then(employeeData => {
+        if (employeeData.confirmAdd) {
+          return questions(teamData);
+        } else {
+          create();
+        }
+    })
+};
+
 // // Write html file
 // function writeToFile(fileName, employeeData) {
 //     return fs.writeFileSync(fileName, employeeData)
@@ -95,3 +95,5 @@ function enterAdditional() {
 
 // Function call to initialize app
 createEmployee();
+
+exports.enterAdditional = enterAdditional;
