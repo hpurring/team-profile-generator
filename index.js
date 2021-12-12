@@ -18,48 +18,9 @@ const { listenerCount } = require("process");
 
 const teamData = [];
 
-const questions = employeeData => {
+const createEmployee = employeeData => {
     inquirer
         .prompt([
-            {
-                name: 'name',
-                type: 'input',
-                message: "What is the employee's name?",
-                validate: nameInput => {
-                    if (nameInput) {
-                        return true;
-                    } else {
-                        console.log("Please provide the employee's name.");
-                        return false;
-                    }
-                }
-            },
-            {
-                name: 'id',
-                type: 'input',
-                message: 'What is their ID?',
-                validate: nameInput => {
-                    if (nameInput) {
-                        return true;
-                    } else {
-                        console.log("Please provide the employee's ID.");
-                        return false;
-                    }
-                }
-            },
-            {
-                name: 'email',
-                type: 'input',
-                message: 'What is their email address?',
-                validate: nameInput => {
-                    if (nameInput) {
-                        return true;
-                    } else {
-                        console.log("Please provide the employee's email address.");
-                        return false;
-                    }
-                }
-            },
             {
                 name: 'position',
                 type: 'list',
@@ -76,73 +37,15 @@ const questions = employeeData => {
             }
         ])
         .then(employeeData => {
-            teamData.push(employeeData)
-            console.log(employeeData)
             if (employeeData.position == 'Manager') {
-                getOfficeNumber();
-            } else if (EmployeeData.position == 'Engineer') {
-                getGithub();
+                createManager();
+            } else if (employeeData.position == 'Engineer') {
+                createEngineer();
             } else {
-                getSchool();
+                createIntern();
             };
+            enterAdditional();
         })
-
-function getOfficeNumber() {
-    inquirer
-        .prompt([
-            {
-                name: 'office',
-                type: 'input',
-                message: 'What is their office number?'
-            }
-        ])
-    
-    .then(employeeData => {
-        teamData.push(employeeData)
-        console.log(teamData)
-    })
-
-    // .then((response) => {
-    //     enterAdditional()
-    // })
-};
-
-function getGithub() {
-    inquirer
-        .prompt([
-            {
-                name: 'github',
-                type: 'input',
-                message: 'What is their GitHub username?'
-            }
-        ])
-
-    .then(employeeData => {
-        teamData.push(employeeData)
-    })
-
-    .then((response) => {
-        enterAdditional()
-    })
-};
-
-function getSchool() {
-    inquirer
-        .prompt([
-            {
-                name: 'school',
-                type: 'input',
-                message: "What is their school's name?"
-            }
-        ])
-    .then(employeeData => {
-        teamData.push(employeeData)
-    })
-    
-    .then((response) => {
-        enterAdditional()
-    })
-};
 
 function enterAdditional() {
     inquirer
@@ -161,8 +64,8 @@ function enterAdditional() {
         } else {
           create();
         }
-      })
-    };
+    })
+};
 
     // Write html file
     function writeToFile(fileName, employeeData) {
@@ -191,4 +94,4 @@ function enterAdditional() {
 // };
 
 // Function call to initialize app
-questions();
+createEmployee();
