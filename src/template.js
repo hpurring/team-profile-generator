@@ -1,4 +1,47 @@
+const index = require('../index');
+const Engineer = require('../lib/Engineer');
 
+function createCard(teamData) {
+  let html = [];
+  teamData.forEach(person => {
+    if (person.getRole() === "Engineer") {
+       html.push(`
+       <div class="card m-3" style="width: 18rem;">
+               <div class="card-body">
+                 <h5 class="card-title">${person.getName()}</h5>
+                 <p class="card-text">${person.getRole()}</p>
+                 <p class="card-text">${person.getId()}</p>
+                 <p class="card-text">${person.getEmail()}</p>
+                 <p class="card-text">${person.getGithub()}</p>
+               </div>
+           </div>`)
+    } else if (person.getRole() === "Manager") {
+      html.push(`
+      <div class="card m-3" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">${person.getName()}</h5>
+                <p class="card-text">${person.getRole()}</p>
+                <p class="card-text">${person.getId()}</p>
+                <p class="card-text">${person.getEmail()}</p>
+                <p class="card-text">${person.getOffice()}</p>
+              </div>
+          </div>`)
+    } else {
+      html.push(`
+      <div class="card m-3" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">${person.getName()}</h5>
+                <p class="card-text">${person.getRole()}</p>
+                <p class="card-text">${person.getId()}</p>
+                <p class="card-text">${person.getEmail()}</p>
+                <p class="card-text">${person.getSchool()}</p>
+              </div>
+          </div>`)
+    }
+  })
+  return html.join('');
+  
+};
 
 function generateHtml(teamData) {
     return `
@@ -19,12 +62,7 @@ function generateHtml(teamData) {
     
     <container class="d-flex justify-content-center justify-content-center">
         <div class="card m-3" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">${teamData.name}</h5>
-              <p class="card-text">${teamData.position}</p>
-              <p class="card-text">${teamData.id}</p>
-              <p class="card-text">${teamData.email}</p>
-            </div>
+            ${createCard(teamData)}
         </div>
        
     </container>

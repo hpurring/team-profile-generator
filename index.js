@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const generateHtml = require("./src/template");
 
-const Employee = require("./lib/Employee");
+// const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
@@ -9,16 +9,16 @@ const Manager = require("./lib/Manager");
 const fs = require("fs");
 const path = require("path");
 
-const outputDirectory = path.resolve(__dirname, "output");
+// const outputDirectory = path.resolve(__dirname, "output");
 
-const outputPath = path.join(outputDirectory, "team.html");
+// const outputPath = path.join(outputDirectory, "team.html");
 
-const render = require("./src/template.js");
-const { listenerCount } = require("process");
+// const render = require("./src/template.js");
+// const { listenerCount } = require("process");
 
 const teamData = [];
 
-const createEmployee = employeeData => {
+function createEmployee() {
     inquirer
         .prompt([
             {
@@ -111,8 +111,8 @@ function createEngineer() {
             }
         ])
         .then(data => {
-            teamData.push(data)
-            console.log(data);
+            const newEngineer = new Engineer(data.name, data.id, data.email, data.github)
+            teamData.push(newEngineer);
             enterAdditional();
         })
 
@@ -180,8 +180,8 @@ function createIntern() {
             }
         ])
         .then(data => {
-            teamData.push(data)
-            console.log(data);
+            const newIntern = new Intern(data.name, data.id, data.email, data.school)
+            teamData.push(newIntern);
             enterAdditional();
         })
 };
@@ -248,12 +248,11 @@ function createManager() {
             }
         ])
         .then(data => {
-            teamData.push(data)
-            console.log(data);
+            const newManager = new Manager(data.name, data.id, data.email,data.office)
+            teamData.push(newManager);
             enterAdditional();
         })
 };
-
 
 function enterAdditional() {
     inquirer
@@ -278,14 +277,13 @@ function writeToFile(fileName, teamData) {
     const outputDirectory = path.resolve(__dirname, "output");
     const outputPath = path.join(outputDirectory, "team.html");
     return fs.writeFileSync(fileName, teamData);
-    
 };
 
 function create() {
+    console.log(teamData);
     console.log("Generate HTML...");
-    writeToFile();
+    writeToFile("team.html", generateHtml(teamData));
 };
-
 
 // Function call to initialize app
 createEmployee();
