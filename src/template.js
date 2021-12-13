@@ -9,10 +9,10 @@ function createCard(teamData) {
        <div class="card m-3" style="width: 18rem;">
                <div class="card-body">
                  <h5 class="card-title">${person.getName()}</h5>
-                 <p class="card-text">${person.getRole()}</p>
-                 <p class="card-text">${person.getId()}</p>
-                 <p class="card-text">${person.getEmail()}</p>
-                 <p class="card-text">${person.getGithub()}</p>
+                 <p class="card-text">Role: ${person.getRole()}</p>
+                 <p class="card-text">ID: ${person.getId()}</p>
+                 <p class="card-text">Email: ${person.getEmail()}</p>
+                 <p class="card-text">Github: ${person.getGithub()}</p>
                </div>
            </div>`)
     } else if (person.getRole() === "Manager") {
@@ -20,10 +20,10 @@ function createCard(teamData) {
       <div class="card m-3" style="width: 18rem;">
               <div class="card-body">
                 <h5 class="card-title">${person.getName()}</h5>
-                <p class="card-text">${person.getRole()}</p>
-                <p class="card-text">${person.getId()}</p>
-                <p class="card-text">${person.getEmail()}</p>
-                <p class="card-text">${person.getOffice()}</p>
+                <p class="card-text">Role: ${person.getRole()}</p>
+                <p class="card-text">ID: ${person.getId()}</p>
+                <p class="card-text">Email: ${person.getEmail()}</p>
+                <p class="card-text">Office #: ${person.getOffice()}</p>
               </div>
           </div>`)
     } else {
@@ -31,10 +31,10 @@ function createCard(teamData) {
       <div class="card m-3" style="width: 18rem;">
               <div class="card-body">
                 <h5 class="card-title">${person.getName()}</h5>
-                <p class="card-text">${person.getRole()}</p>
-                <p class="card-text">${person.getId()}</p>
-                <p class="card-text">${person.getEmail()}</p>
-                <p class="card-text">${person.getSchool()}</p>
+                <p class="card-text">Role: ${person.getRole()}</p>
+                <p class="card-text">ID: ${person.getId()}</p>
+                <p class="card-text">Email: ${person.getEmail()}</p>
+                <p class="card-text">College/University: ${person.getSchool()}</p>
               </div>
           </div>`)
     }
