@@ -53,19 +53,6 @@ function createEngineer() {
     inquirer
         .prompt([
             {
-                name: 'position',
-                type: 'input',
-                message: "What is the new hire's title?",
-                validate: nameInput => {
-                    if (nameInput) {
-                        return true;
-                    } else {
-                        console.log("Please provide the new hire's title.");
-                        return false;
-                    }
-                }
-            },
-            {
                 name: 'name',
                 type: 'input',
                 message: "What is the engineer's name?",
@@ -122,19 +109,6 @@ function createIntern() {
     inquirer
         .prompt([
             {
-                name: 'position',
-                type: 'input',
-                message: "What is the new hire's title?",
-                validate: nameInput => {
-                    if (nameInput) {
-                        return true;
-                    } else {
-                        console.log("Please provide the new hire's title.");
-                        return false;
-                    }
-                }
-            },
-            {
                 name: 'name',
                 type: 'input',
                 message: "What is the intern's name?",
@@ -189,19 +163,6 @@ function createIntern() {
 function createManager() {
     inquirer
         .prompt([
-            {
-                name: 'position',
-                type: 'input',
-                message: "What is the new hire's title?",
-                validate: nameInput => {
-                    if (nameInput) {
-                        return true;
-                    } else {
-                        console.log("Please provide the new hire's title.");
-                        return false;
-                    }
-                }
-            },
             {
                 name: 'name',
                 type: 'input',
