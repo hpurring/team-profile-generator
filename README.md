@@ -22,7 +22,7 @@
   ## Usage
   Use to generate profiles of your office's team.
   
-  [Team Profile Generator Demo Video](https://drive.google.com/file/d/1UZDqzJ4sFH2bm18DU11aA7uGpsihWIA1/view?usp=sharing "Team Profile Generator Demo")
+  [Team Profile Generator Demo Video](https://drive.google.com/file/d/1TYLEZcD70w_AK2aEEI9IDtsLOB_D2k03/view?usp=sharing "Team Profile Generator Demo")
 
 
   ## Credits
