@@ -1,6 +1,6 @@
 
 
-function generateHtml(data) {
+function generateHtml(teamData) {
     return `
 
     <!DOCTYPE html>
@@ -20,21 +20,16 @@ function generateHtml(data) {
     <container class="d-flex justify-content-center justify-content-center">
         <div class="card m-3" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">${data.name}</h5>
-              <p class="card-text">${data.position}</p>
-              <p class="card-text">${data.id}</p>
-              <p class="card-text">${data.email}</p>
+              <h5 class="card-title">${teamData.name}</h5>
+              <p class="card-text">${teamData.position}</p>
+              <p class="card-text">${teamData.id}</p>
+              <p class="card-text">${teamData.email}</p>
             </div>
         </div>
-        <div class="card m-3" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">${data.name}</h5>
-              <p class="card-text">${data.position}</p>
-              <p class="card-text">${data.id}</p>
-              <p class="card-text">${data.email}</p>
-            </div>
-        </div>
+       
     </container>
 `
 
 }
+
+module.exports = generateHtml;

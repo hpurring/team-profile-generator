@@ -2,9 +2,9 @@ const inquirer = require("inquirer");
 const generateHtml = require("./src/template");
 
 const Employee = require("./lib/Employee");
-const createEngineer = require("./lib/Engineer");
-const createIntern = require("./lib/Intern");
-const createManager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
 
 const fs = require("fs");
 const path = require("path");
@@ -41,28 +41,219 @@ const createEmployee = employeeData => {
                 createManager();
                 // enterAdditional();
             } else if (employeeData.position == 'Engineer') {
-                createEngineer();
-                // enterAdditional();
+                createEngineer()
             } else {
                 createIntern();
             };
         })
 
-    // Write html file
-    function writeToFile(fileName, employeeData) {
-        const outputDirectory = path.resolve(__dirname, "output");
-        const outputPath = path.join(outputDirectory, "team.html");
+};
 
-        return fs.writeFileSync(outputPath, generateHtml(employeeData));
-        
-    };
-
-    function create() {
-        console.log("Generate HTML...");
-        writeToFile();
-    };
+function createEngineer() {
+    inquirer
+        .prompt([
+            {
+                name: 'position',
+                type: 'input',
+                message: "What is the new hire's title?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the new hire's title.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'name',
+                type: 'input',
+                message: "What is the engineer's name?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the engineer's name.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'id',
+                type: 'input',
+                message: "What is the engineer's ID?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the engineer's ID.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'email',
+                type: 'input',
+                message: "What is the engineer's email address?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the engineer's email address.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'github',
+                type: 'input',
+                message: "What is engineer's GitHub username?"
+            }
+        ])
+        .then(data => {
+            teamData.push(data)
+            console.log(data);
+            enterAdditional();
+        })
 
 };
+
+function createIntern() {
+    inquirer
+        .prompt([
+            {
+                name: 'position',
+                type: 'input',
+                message: "What is the new hire's title?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the new hire's title.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'name',
+                type: 'input',
+                message: "What is the intern's name?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the intern's name.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'id',
+                type: 'input',
+                message: "What is the intern's ID?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the intern's ID.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'email',
+                type: 'input',
+                message: "What is the intern's email address?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the intern's email address.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'school',
+                type: 'input',
+                message: "In which college/university is the intern currently enrolled?"
+            }
+        ])
+        .then(data => {
+            teamData.push(data)
+            console.log(data);
+            enterAdditional();
+        })
+};
+
+function createManager() {
+    inquirer
+        .prompt([
+            {
+                name: 'position',
+                type: 'input',
+                message: "What is the new hire's title?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the new hire's title.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'name',
+                type: 'input',
+                message: "What is the manager's name?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the manager's name.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'id',
+                type: 'input',
+                message: "What is the manager's ID?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the manager's ID.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'email',
+                type: 'input',
+                message: "What is the manager's email address?",
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please provide the manager's email address.");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: 'office',
+                type: 'input',
+                message: "What is the manager's office number?"
+            }
+        ])
+        .then(data => {
+            teamData.push(data)
+            console.log(data);
+            enterAdditional();
+        })
+};
+
 
 function enterAdditional() {
     inquirer
@@ -76,24 +267,26 @@ function enterAdditional() {
 
     .then(employeeData => {
         if (employeeData.confirmAdd) {
-          return questions(teamData);
+          createEmployee();
         } else {
           create();
         }
     })
 };
 
-// // Write html file
-// function writeToFile(fileName, employeeData) {
-//     return fs.writeFileSync(fileName, employeeData)
-// };
+function writeToFile(fileName, teamData) {
+    const outputDirectory = path.resolve(__dirname, "output");
+    const outputPath = path.join(outputDirectory, "team.html");
+    return fs.writeFileSync(fileName, teamData);
+    
+};
 
-// function create() {
-//     console.log("Generate HTML...");
-//     writeToFile("index.html", generateHtml(employeeData));
-// };
+function create() {
+    console.log("Generate HTML...");
+    writeToFile();
+};
+
 
 // Function call to initialize app
 createEmployee();
 
-exports.enterAdditional = enterAdditional;
