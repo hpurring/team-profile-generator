@@ -6,34 +6,34 @@ function createCard(teamData) {
   teamData.forEach(person => {
     if (person.getRole() === "Engineer") {
        html.push(`
-       <div class="card m-3" style="width: 18rem;">
+       <div class="card m-3 shadow p-3 mb-5 bg-white rounded" style="width: auto;">
                <div class="card-body">
                  <h5 class="card-title">${person.getName()}</h5>
                  <p class="card-text">Role: ${person.getRole()}</p>
                  <p class="card-text">ID: ${person.getId()}</p>
-                 <p class="card-text">Email: ${person.getEmail()}</p>
-                 <p class="card-text">Github: ${person.getGithub()}</p>
+                 <p class="card-text">Email: <a href="mailto:${person.getEmail()}">${person.getEmail()}</a></p>
+                 <p class="card-text">Github: <a href="https://github.com/${person.getGithub()}">${person.getGithub()}</a></p>
                </div>
            </div>`)
     } else if (person.getRole() === "Manager") {
       html.push(`
-      <div class="card m-3" style="width: 18rem;">
+      <div class="card m-3 shadow p-3 mb-5 bg-white rounded" style="width: auto;">
               <div class="card-body">
                 <h5 class="card-title">${person.getName()}</h5>
                 <p class="card-text">Role: ${person.getRole()}</p>
                 <p class="card-text">ID: ${person.getId()}</p>
-                <p class="card-text">Email: ${person.getEmail()}</p>
+                <p class="card-text">Email: <a href="mailto:${person.getEmail()}">${person.getEmail()}</a></p>
                 <p class="card-text">Office #: ${person.getOffice()}</p>
               </div>
           </div>`)
     } else {
       html.push(`
-      <div class="card m-3" style="width: 18rem;">
+      <div class="card m-3 shadow p-3 mb-5 bg-white rounded" style="width: auto;">
               <div class="card-body">
                 <h5 class="card-title">${person.getName()}</h5>
                 <p class="card-text">Role: ${person.getRole()}</p>
                 <p class="card-text">ID: ${person.getId()}</p>
-                <p class="card-text">Email: ${person.getEmail()}</p>
+                <p class="card-text">Email: <a href="mailto${person.getEmail()}">${person.getEmail()}</a></p>
                 <p class="card-text">College/University: ${person.getSchool()}</p>
               </div>
           </div>`)
@@ -60,8 +60,8 @@ function generateHtml(teamData) {
         <h1 class="bg-primary text-light text-md-center p-md-2">Our Team</h1>
     </header>
     
-    <container class="d-flex justify-content-center justify-content-center">
-        <div class="card m-3" style="width: 18rem;">
+    <container class="d-flex justify-content-center">
+        <div class="card m-3">
             ${createCard(teamData)}
         </div>
        

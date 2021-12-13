@@ -17,12 +17,12 @@
   * [Questions](#questions)
 
   ## Installation
-  Install node.js. While in the root directory of your project, enter 'node index' into terminal, and then answer the following prompts.
+  Install node.js. While in the root directory of the project, enter 'node index' into terminal, and then answer the following prompts.
 
   ## Usage
   Use to generate profiles of your office's team.
   
-  [Team Profile Generator Demo Video](https://drive.google.com/file/d/1H1CQYSwVltLg5lXhZwdNyT3qBs4sQLmX/view "Team Profile Generator Demo")
+  [Team Profile Generator Demo Video](https://drive.google.com/file/d/1UZDqzJ4sFH2bm18DU11aA7uGpsihWIA1/view?usp=sharing "Team Profile Generator Demo")
 
 
   ## Credits
