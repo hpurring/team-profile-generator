@@ -21,7 +21,8 @@
 
   ## Usage
   Use to generate profiles of your office's team.
-  
+
+  ![Team Profile Generator](https://github.com/hpurring/team-profile-generator/blob/main/assets/team-profile-generator.png)  
   [Team Profile Generator Demo Video](https://drive.google.com/file/d/1TYLEZcD70w_AK2aEEI9IDtsLOB_D2k03/view?usp=sharing "Team Profile Generator Demo")
 
 
